@@ -12,7 +12,6 @@ class LinkCtrl extends CuterCtrl
      */
     public function __construct(Request $r)
     {
-        dd('$this->data');
         $this->data = $this->inputData($r);
     }
 
@@ -20,12 +19,12 @@ class LinkCtrl extends CuterCtrl
      * create new url link
      */
      public function shortenerLink(){
-
          $data = [
-             'url' => 'fna',
-             'link' => 'http://fna.ir',
+             'url' => $this->createNewURL($this->data['uri']),
+             'link' => $this->data['uri'],
              'registrantIp' => '192.10.255.23',
          ];
-         return LinkBL::createNew($data);
+         $result = LinkBL::createNew($data);
+         return $this->outputPacker(1, $result);
      }
 }

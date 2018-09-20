@@ -15,10 +15,10 @@ class CuterServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         // $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
-        // $this->publishes([
+        $this->publishes([
         //     __DIR__.'/path/to/translations' => resource_path('lang/vendor/courier'),
-        // ]);
-        include __DIR__.'/routes.php';
+        ]);
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
 
     }
 
@@ -29,6 +29,9 @@ class CuterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('Simcript\Cuter\LinkCtrl');
+        $this->app->make('Simcript\Cuter\Controllers\CuterCtrl');
+        $this->app->make('Simcript\Cuter\Controllers\LinkCtrl');
+        $this->app->make('Simcript\Cuter\BusinessLogics\LinkBL');
+        $this->app->make('Simcript\Cuter\Models\Link');
     }
 }

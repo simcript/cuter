@@ -15,7 +15,7 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url', 20);
+            $table->string('url', 20)->unique();
             $table->string('link', 1000);
             $table->ipAddress('registrantIp');
             $table->timestamps();
