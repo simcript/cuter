@@ -19,9 +19,10 @@ class CreateVisitorsTable extends Migration
             $table->string('referrer', 256)->nullable();
             $table->ipAddress('ip');
             $table->timestamp('created_at');
+
+            $table->foreign('link_id')->references('id')->on('links')->onDelete('cascade');
         });
 
-        $table->foreign('link_id')->references('id')->on('links')->onDelete('cascade');
     }
 
     /**

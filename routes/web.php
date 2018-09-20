@@ -12,6 +12,6 @@
 */
 
 $router->get('/', function () use ($router) {
-    return "view('home')";
+    return view('home');
 });
 include 'api.php';
