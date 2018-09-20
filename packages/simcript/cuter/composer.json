@@ -1,0 +1,15 @@
+{
+    "name": "simcript/cuter",
+    "description": "A link shorthand",
+    "type": "metapackage",
+    "require": {
+        "laravel/framework": "5.7"
+    },
+    "authors": [
+        {
+            "name": "AliA MehR",
+            "email": "alia_mehr@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

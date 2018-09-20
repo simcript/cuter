@@ -150,6 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
+         Simcript\Cuter\CuterServiceProvider::class,
 
         /*
          * Application Service Providers...

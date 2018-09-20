@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Simcript\Cuter;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class LinkCtrl extends Controller
 {
@@ -18,6 +21,6 @@ class LinkCtrl extends Controller
      * create new url link
      */
      public function shortenerLink(){
-       return ('hello');
+         return 'test';
      }
 }
