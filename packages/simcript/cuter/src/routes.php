@@ -7,6 +7,6 @@
 */
 
 Route::group(['prefix' => '/sc1', 'namespace' => 'Simcript\Cuter'], function () {
-  Route::get('/tst', 'LinkCtrl@shortenerLink');
+  Route::get('/tstw', 'LinkCtrl@shortenerLink');
     // $router->get('test', '');
 });
