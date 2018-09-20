@@ -1,2 +1,0 @@
-# cuter
-A URL Shortener
