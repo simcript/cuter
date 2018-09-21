@@ -21,9 +21,10 @@ class Link extends Model
      * @var array
      */
     protected $fillable = [
+        'base_url',
         'url',
         'link',
-        'registrantIp',
+        'registrant_ip',
     ];
 
     /**
@@ -32,7 +33,7 @@ class Link extends Model
      * @var array
      */
     protected $hidden = [
-        'registrantIp', 'id', 'updated_at'
+        'registrant_ip', 'id', 'updated_at'
     ];
 
     /**

@@ -1,6 +1,10 @@
-<?php
+<?php namespace Simcript\Cuter;
 
-namespace Simcript\Cuter;
+/**
+ * Created by AliA_MehR <alia_mehr@yahoo.com>
+ * Date: Friday - 2018 21 September 15:30:12
+ * Description: ServiceProvider cuter laravel package.
+ */
 
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +20,7 @@ class CuterServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         // $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
         $this->publishes([
+            __DIR__.'/cuter.php' => config_path('cuter.php'),
         //     __DIR__.'/path/to/translations' => resource_path('lang/vendor/courier'),
         ]);
         $this->loadRoutesFrom(__DIR__.'/routes.php');

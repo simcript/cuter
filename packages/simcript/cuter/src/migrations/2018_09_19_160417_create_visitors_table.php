@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Created by AliA_MehR <alia_mehr@yahoo.com>
+ * Date: Friday - 2018 21 September 15:30:12
+ * Description: Create table visitors.
+ */
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

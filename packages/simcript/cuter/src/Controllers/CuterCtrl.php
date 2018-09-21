@@ -1,37 +1,73 @@
 <?php namespace Simcript\Cuter\Controllers;
+
+/**
+ * Created by AliA_MehR <alia_mehr@yahoo.com>
+ * Date: Friday - 2018 21 September 15:30:12
+ * Description: Base controller file for Cuter package.
+ */
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
 
 use Simcript\Cuter\BusinessLogics\LinkBL;
 class CuterCtrl extends Controller
 {
-    private $_inputParamName = 'dj';     //Data JSON
-    private $_dataSectionName = 'Result';
+    private $_inputParamName = 'dj';        //Name input parameter which filled with input data. dj = Data JSON
+    private $_dataSectionName = 'Result';   //Name output parameter which filled with input data. dj = Data JSON
+    private $_baseUrl = 'http://cuter.ml/'; //Base url for url short shortened
+
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Gat and unpack inpute data
+     * @param Request
+     * @return Array
      */
     public function inputData(Request $r){
-        $jsonData = $r->all()[$this->_inputParamName];
-        return json_decode($jsonData, true);
+        $inputData = $r->all();
+        if (isset($inputData[$this->_inputParamName])) {
+            $jsonData = $inputData[$this->_inputParamName];
+            return json_decode($jsonData, true);
+        }
     }
 
+    /**
+     * unpack and send output data
+     * @param $code for message and output, $data contain output data
+     * @return JSON
+     */
     public function outputPacker($code, $data){
-        $result ['meta']['package name'] = 'Cuter';
+        $result ['meta']['package name'] = config('cuter.packageName');
         $result ['meta']['code'] = $code;
         $result [$this->_dataSectionName] = $data;
         return json_encode($result);
     }
 
-    public function createNewURL($uri){
-        $t = str_split((string)(time()));
-        $characters = str_split('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        shuffle($characters);
-        $randomString = '';
-        for ($i = 0; $i < count($t); $i++) {
-            $randomString .= $characters[$t[$i]];
+    /**
+     * create unique string for url
+     * @param $tryNo number of try
+     * @return JSON
+     */
+    public function createNewURL($tryNo){
+        $len = config('cuter.length');  //length url shortened
+        $changed = false;
+        if ($tryNo > 7){
+            $len += 1;
+            $changed = ($len < 10) ? true : false;
+        }
+        if (($tryNo < 3) || $changed) {
+            $t = str_split((string)(time()));
+            $characters = str_split(config('cuter.alphabet'));
+            shuffle($characters);
+            $randomString = '';
+            for ($tryNo = 0; $tryNo < $len; $tryNo++) {
+                $randomString .= $characters[$t[$tryNo]];
+            }
+        } else {
+            $randomString = uniqid('sc');
+            if ($len < 14) {
+                $randomString = substr($randomString, 0, $len);
+            } else {
+                $randomString = uniqid('sc', true);
+            }
         }
         return $randomString;
     }

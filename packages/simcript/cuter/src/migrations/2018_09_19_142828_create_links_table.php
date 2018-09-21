@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Created by AliA_MehR <alia_mehr@yahoo.com>
+ * Date: Friday - 2018 21 September 15:30:12
+ * Description: Create table links.
+ */
+ 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,9 +21,10 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url', 20)->unique();
+            $table->string('base_url', 30);
+            $table->string('url', 20);
             $table->string('link', 1000);
-            $table->ipAddress('registrantIp');
+            $table->ipAddress('registrant_ip');
             $table->timestamps();
             $table->softDeletes();
         });
