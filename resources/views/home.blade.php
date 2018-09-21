@@ -59,7 +59,7 @@
                     <form>
                         <div class="form-group" id="cutform">
                             <div class="input-group input-group-lg">
-                                <input value="https://stackoverflow.com/questions/18697034/how-to-pass-parameters-in-ajax-post/35590754" class="form-control input-lg" type="url" id="link" placeholder="Your Link" autofocus="">
+                                <input class="form-control input-lg" type="url" id="link" placeholder="Your Link" autofocus="">
                                 <div class="input-group-btn">
                                     <button id="cut" class="btn btn-success btn-lg" type="button">Cut!</button>
                                 </div>

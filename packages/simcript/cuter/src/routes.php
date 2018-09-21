@@ -7,6 +7,6 @@
  */
 
 Route::group(['prefix' => config('cuter.apiPerfix'), 'namespace' => 'Simcript\Cuter\Controllers'], function () {
-  Route::post('/cut', 'LinkCtrl@shortenerLink');     // Link Shortener, input: uri
-  Route::post('/past', 'LinkCtrl@pastLink');     // Link Shortener, input: url, redirect
+  Route::post('/cut', 'LinkCtrl@shortenerLink')->name('sc_cut');     // Link Shortener, input: uri
+  Route::get('/past', 'LinkCtrl@pastLink')->name('sc_past');     // Link Shortener, input: url, redirect
 });

@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/{lnk?}', function ($lnk) {
+    return redirect(route('sc_past') . '?dj={"url":"'.$lnk.'","redirect":true}');
+});
