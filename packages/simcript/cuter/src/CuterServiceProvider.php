@@ -37,6 +37,8 @@ class CuterServiceProvider extends ServiceProvider
         $this->app->make('Simcript\Cuter\Controllers\CuterCtrl');
         $this->app->make('Simcript\Cuter\Controllers\LinkCtrl');
         $this->app->make('Simcript\Cuter\BusinessLogics\LinkBL');
+        $this->app->make('Simcript\Cuter\BusinessLogics\VisitorBL');
         $this->app->make('Simcript\Cuter\Models\Link');
+        $this->app->make('Simcript\Cuter\Models\Visitor');
     }
 }

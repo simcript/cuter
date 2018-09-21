@@ -25,7 +25,10 @@ class CuterCtrl extends Controller
         $inputData = $r->all();
         if (isset($inputData[$this->_inputParamName])) {
             $jsonData = $inputData[$this->_inputParamName];
-            return json_decode($jsonData, true);
+            $jsonData = json_decode($jsonData, true);
+            $jsonData['ip'] = $r->ip();
+            $jsonData['referrer'] = $r->server('HTTP_REFERER');
+            return $jsonData;
         }
     }
 
@@ -34,10 +37,12 @@ class CuterCtrl extends Controller
      * @param $code for message and output, $data contain output data
      * @return JSON
      */
-    public function outputPacker($code, $data){
-        $result ['meta']['package name'] = config('cuter.packageName');
+    public function outputPacker($code, $data = null){
+        $result ['meta']['package'] = config('cuter.packageName');
         $result ['meta']['code'] = $code;
-        $result [$this->_dataSectionName] = $data;
+        if ($data !== null) {
+            $result[$this->_dataSectionName] = $data;
+        }
         return json_encode($result);
     }
 

@@ -8,4 +8,5 @@
 
 Route::group(['prefix' => config('cuter.apiPerfix'), 'namespace' => 'Simcript\Cuter\Controllers'], function () {
   Route::get('/cut', 'LinkCtrl@shortenerLink');     // Link Shortener, input: uri
+  Route::get('/past', 'LinkCtrl@pastLink');     // Link Shortener, input: url
 });

@@ -33,7 +33,7 @@ class Link extends Model
      * @var array
      */
     protected $hidden = [
-        'registrant_ip', 'id', 'updated_at'
+        'registrant_ip', 'id', 'updated_at', 'deleted_at'
     ];
 
     /**

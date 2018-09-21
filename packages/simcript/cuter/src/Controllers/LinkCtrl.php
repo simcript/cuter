@@ -8,7 +8,8 @@
 
 use Illuminate\Http\Request;
 use Simcript\Cuter\BusinessLogics\LinkBL;
-
+use Simcript\Cuter\BusinessLogics\VisitorBL;
+use Exception;
 class LinkCtrl extends CuterCtrl
 {
     protected $data = null;         // for save input data filled by inputData
@@ -31,18 +32,50 @@ class LinkCtrl extends CuterCtrl
      * @return shortUrl
      */
      public function shortenerLink(){
-         $i = 0;
-         do {
-             $url = $this->createNewURL($i++);
-         } while (!LinkBL::uniqueCheck($url));
-         $data = [
-             'base_url' => $this->_baseUrl,
-             'url' => $url,
-             'link' => $this->data['uri'],
-             'registrant_ip' => '192.10.255.23',
-         ];
-         $result = LinkBL::createNew($data);
-         $shrtLink['shortUrl'] = $result->base_url . $result->url;
-         return $this->outputPacker(1, $shrtLink);
+         try {
+             $i = 0;
+             do {
+                 $url = $this->createNewURL($i++);
+             } while (!LinkBL::uniqueCheck($url));
+             $data = [
+                 'base_url' => $this->_baseUrl,
+                 'url' => $url,
+                 'link' => $this->data['uri'],
+                 'registrant_ip' => $this->data['ip'],
+             ];
+             $result = LinkBL::createNew($data);
+             $shrtLink['shortUrl'] = $result->base_url . $result->url;
+             return $this->outputPacker(1, $shrtLink);
+         } catch (\Exception $e) {
+             return $this->outputPacker($e->getMessage());
+         }
+    }
+
+    /**
+     * find link for redirect
+     * @param $url contain short url, $redirect for redirect to link
+     * @return shortUrl
+     */
+     public function pastLink(){
+         try {
+             $url = $this->data['url'];
+             $result = LinkBL::find($url);
+             if (!$result) throw new Exception(-1);
+             $visitorData = [
+                 'link_id' => $result->id,
+                 'referrer' => $this->data['referrer'],
+                 'ip'  => $this->data['ip'],
+                 'created_at' => date('Y-m-d H:i:s'),
+             ];
+             $newVisit = VisitorBL::createNew($visitorData);
+             if (!$newVisit) throw new Exception(-2);
+             if ($this->data['redirect']) {
+                 return redirect($result->link);
+             }
+             return $this->outputPacker(2, $result);
+         } catch (\Exception $e) {
+             return $this->outputPacker($e->getMessage());
+         }
+
      }
 }

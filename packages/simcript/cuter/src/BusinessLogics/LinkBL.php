@@ -34,4 +34,19 @@ class LinkBL
          }
          return true;
      }
+
+    /**
+     * get url data
+     * @param $url
+     * @return Boolean
+     */
+     public static function find($url){
+         $links = Link::where('url', $url)->get();
+         foreach ($links as $lnk) {
+             if ($lnk->url === $url) {
+                 return $lnk;
+             }
+         }
+         return null;
+     }
 }
