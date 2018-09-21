@@ -69,7 +69,7 @@
                             <div class="input-group input-group-lg">
                                 <input class="form-control input-lg" type="url" id="shrtlnk">
                                 <div class="input-group-btn">
-                                    <button id="copy" class="btn btn-info btn-lg" type="button">Copy</button>
+                                    <button id="copy" class="btn btn-warning btn-lg" type="button">Copy</button>
                                 </div>
                             </div>
                         </div>
