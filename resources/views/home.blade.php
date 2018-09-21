@@ -57,9 +57,20 @@
                     <h1 style="margin-top:84px;">Shorten your link here</h1>
                     <p>Cuter helps you to make your links short and beautiful. Just enter your link in the box below. Now you are here, then shorten your link. </p>
                     <form>
-                        <div class="form-group">
-                            <div class="input-group input-group-lg"><input class="form-control input-lg" type="url" name="link" placeholder="Your Link" autofocus="">
-                                <div class="input-group-btn"><button class="btn btn-success btn-lg" type="button">Cut!</button></div>
+                        <div class="form-group" id="cutform">
+                            <div class="input-group input-group-lg">
+                                <input value="https://stackoverflow.com/questions/18697034/how-to-pass-parameters-in-ajax-post/35590754" class="form-control input-lg" type="url" id="link" placeholder="Your Link" autofocus="">
+                                <div class="input-group-btn">
+                                    <button id="cut" class="btn btn-success btn-lg" type="button">Cut!</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="responseform">
+                            <div class="input-group input-group-lg">
+                                <input class="form-control input-lg" type="url" id="shrtlnk">
+                                <div class="input-group-btn">
+                                    <button id="copy" class="btn btn-info btn-lg" type="button">Copy</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -71,6 +82,33 @@
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $( "#responseform" ).hide();
+
+        $( "#cut" ).click(function( event ) {
+            term = $( "#link" ).val();
+            url = `http://cuter.tst/sc1/cut?dj=` + '{"uri" : "'+ term +'"}';
+            // Send the data using post
+            $.post(url, null,
+                 function(returnedData){
+                     if (returnedData.meta.code > 0) {
+                         $( "#shrtlnk" ).val(returnedData.Result.shortUrl);
+                         $( "#cutform" ).hide();
+                         $( "#responseform" ).show();
+                     } else {
+                         alert('Error:' + returnedData.meta.code);
+                     }
+            }, 'json');
+        });
+        $( "#copy" ).click(function( event ) {
+            /* Get the text field */
+            var copyText = document.getElementById("shrtlnk");
+            /* Select the text field */
+            copyText.select();
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+        });
+    </script>
 </body>
 
 </html>
