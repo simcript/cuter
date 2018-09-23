@@ -17,14 +17,11 @@ class CuterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
-        // $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->publishes([
-            __DIR__.'/cuter.php' => config_path('cuter.php'),
-        //     __DIR__.'/path/to/translations' => resource_path('lang/vendor/courier'),
+            __DIR__.'/../config/cuter.php' => config_path('cuter.php'),
         ]);
         $this->loadRoutesFrom(__DIR__.'/routes.php');
-
     }
 
     /**
