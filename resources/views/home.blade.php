@@ -89,7 +89,7 @@
             term = $( "#link" ).val();
             url = `http://cuter.tst/sc1/cut?dj=` + '{"uri" : "'+ term +'"}';
             // Send the data using post
-            $.post(url, null,
+            $.get(url, null,
                  function(returnedData){
                      if (returnedData.meta.code > 0) {
                          $( "#shrtlnk" ).val(returnedData.Result.shortUrl);
