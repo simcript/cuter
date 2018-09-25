@@ -28,11 +28,11 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "1.0-dev"
         },
         "laravel": {
-            "providers": [
-                "Simcript\\Cuter\\CuterServiceProvider"
+           "dont-discover": [
+                "Simcript/Cuter" 
             ]
         }
     },
