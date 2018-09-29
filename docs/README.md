@@ -29,7 +29,7 @@ composer require simcript/cuter
 To use this package, you need to create the corresponding tables in the database. To do this, run the following command:
 
 ```sh
-$ php artisan migrate"
+$ php artisan migrate
 ```
 
 Config file defaults putting up in `config/cuter.php`. Copy this file to your own config directory to modify the values. You can publish the config using this command:
@@ -46,5 +46,5 @@ $ php artisan vendor:publish --provider="Simcript\Cuter\CuterServiceProvider"
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
